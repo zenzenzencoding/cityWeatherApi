@@ -50,5 +50,8 @@ realWeatherDict = defaultdict(dict)
 forecastWeatherDict = defaultdict(dict)
 cityInfoDict = defaultdict(dict)
 cityCodeDict = defaultdict(list)
+forecastWeatherToday = defaultdict(dict)
+forecastWeatherTomorrow = defaultdict(dict)
+
 
 
