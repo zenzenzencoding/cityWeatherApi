@@ -107,5 +107,5 @@ if __name__ == '__main__':
         for cc in cityInfo.get(pro):
             cityname = cityInfo[pro][cc][1]
             forecastWeatherToday = pd.concat([forecastWeatherToday,fws.getForecastWeather(pro,cityname)],ignore_index=True)
-    forecastWeatherToday.to_csv("forecastWeather_%s"%(ctime),index=False)
+    forecastWeatherToday.to_csv("forecastWeatherToday_%s"%(ctime),index=False)
 

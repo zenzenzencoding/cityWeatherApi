@@ -47,10 +47,22 @@ provinces = {
 }
 
 provincesCitys= {}
-realWeatherDict = defaultdict(dict)
 forecastWeatherDict = defaultdict(dict)
 cityInfoDict = defaultdict(dict)
 cityCodeDict = defaultdict(list)
+realWeather = pd.DataFrame({},columns=["city",
+                                        "cityCode",
+                                        "publishDate",
+                                        "publishTime",
+                                        "temperature",
+                                        "humidity",
+                                        "rain",
+                                        "rcomfort",
+                                        "weatherType",
+                                        "windDirect",
+                                        "windSpeed",
+                                        "windPower"])
+
 forecastWeatherToday = pd.DataFrame({},columns=["city",
                                                 "date",
                                                 "forecasttime",

@@ -84,7 +84,7 @@ class ForecastWeatherSpider():
             "yl":ylTomorrow,
             "njd":njdTomorrow
         }
-        return _forecastWeatherTomorrow
+        return pd.DataFrame(_forecastWeatherTomorrow)
 
 if __name__ == '__main__':
     fws = ForecastWeatherSpider()
@@ -93,9 +93,9 @@ if __name__ == '__main__':
     for pro in cityInfo:
         for cc in cityInfo.get(pro):
             cityname = cityInfo[pro][cc][1]
-            forecastWeatherToday = pd.concat([forecastWeatherToday, fws.getForecastWeather(pro, cityname)],
+            forecastWeatherTomorrow = pd.concat([forecastWeatherTomorrow, fws.getForecastWeather(pro, cityname)],
                                              ignore_index=True)
-    forecastWeatherToday.to_csv("forecastWeatherTomorrow_%s" % (ctime), index=False)
+    forecastWeatherTomorrow.to_csv("forecastWeatherTomorrow_%s" % (ctime), index=False)
 
 
 

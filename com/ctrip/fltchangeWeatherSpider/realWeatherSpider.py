@@ -20,14 +20,13 @@ from bs4 import BeautifulSoup
 import lxml.html
 from collections import defaultdict
 from pprint import pprint
-from config import provinces,provincesCitys,realWeatherDict
 reload(sys)
 sys.setdefaultencoding('utf-8')
 timeout = 20
 import socket
 socket.setdefaulttimeout(timeout)
 import chardet
-
+import pandas as pd
 class BrowserOpener:
     def myopener(self):
         cookie_support = urllib2.HTTPCookieProcessor(cookielib.CookieJar())
@@ -53,7 +52,6 @@ class RealWeatherSpider(BrowserOpener):
 
     def getRealCityWeather(self,cityCode):
         initUrl = r"http://www.nmc.cn/f/rest/real/%s"%(cityCode)
-        _realWeatherDict = defaultdict(dict)
         contents = self.opener.open(initUrl).read()
         typeEncode = sys.getfilesystemencoding()  #系统默认编码
         infoencode = chardet.detect(contents).get('encoding', 'utf-8')  #提取网页的编码
@@ -69,24 +67,30 @@ class RealWeatherSpider(BrowserOpener):
         windDirect = realWeatherInfo["wind"]["direct"]
         windPower = realWeatherInfo["wind"]["power"]
         windSpeed = realWeatherInfo["wind"]["speed"]
-        _realWeatherDict[cityCode][publishDate]=[city,#城市
-                                                 publishDate,#发布日期
-                                                 publishTime,#发布时间
-                                                 temperature,#温度
-                                                 humidity,#相对湿度
-                                                 rain,#降雨量
-                                                 rcomfort,#舒适度
-                                                 weatherType,#天气类型
-                                                 windDirect,#风向
-                                                 windSpeed,#风速
-                                                 windPower]#风力
-        realWeatherDict.update(_realWeatherDict)
+        _realWeather={"city":city,
+                       "cityCode":[cityCode],
+                       "publishDate":[publishDate],
+                       "publishTime":[publishTime],
+                       "temperature":[temperature],
+                       "humidity":[humidity],
+                       "rain":[rain],
+                       "rcomfort":[rcomfort],
+                       "weatherType":[weatherType],
+                       "windDirect": [windDirect],
+                       "windSpeed":[windSpeed],
+                       "windPower":[windPower]}
+        return pd.DataFrame(_realWeather)
 def main():
+    from config import realWeather
+    print realWeather
+    ctime = time.strftime("%Y%m%d", time.localtime(time.time()))
     cityCodes =json.load(open("cityCode.json","r"),encoding="utf-8")
     rws = RealWeatherSpider()
     for pro in cityCodes:
         for cc in cityCodes.get(pro):
-            rws.getRealCityWeather(cc)
+            realWeather = pd.concat([realWeather,rws.getRealCityWeather(cc)],ignore_index=True)
+    realWeather.to_csv("realtWeather_%s" % (ctime), index=False)
+    print realWeather
 
 if __name__ == '__main__':
     main()
