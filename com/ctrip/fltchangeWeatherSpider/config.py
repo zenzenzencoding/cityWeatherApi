@@ -7,6 +7,7 @@ Created on 2016/09/27
 @version: 0.1
 '''
 from collections import defaultdict
+import pandas as pd
 #地区配置
 provinces = {
 "ABJ":"北京市",
@@ -50,8 +51,28 @@ realWeatherDict = defaultdict(dict)
 forecastWeatherDict = defaultdict(dict)
 cityInfoDict = defaultdict(dict)
 cityCodeDict = defaultdict(list)
-forecastWeatherToday = defaultdict(dict)
-forecastWeatherTomorrow = defaultdict(dict)
+forecastWeatherToday = pd.DataFrame({},columns=["city",
+                                                "date",
+                                                "forecasttime",
+                                                "js",
+                                                "njd",
+                                                "speed",
+                                                "tqxx",
+                                                "wd",
+                                                "windd",
+                                                "xdsd",
+                                                "yl"])
+forecastWeatherTomorrow =pd.DataFrame({},columns=["city",
+                                                "date",
+                                                "forecasttime",
+                                                "js",
+                                                "njd",
+                                                "speed",
+                                                "tqxx",
+                                                "wd",
+                                                "windd",
+                                                "xdsd",
+                                                "yl"])
 
 
 
