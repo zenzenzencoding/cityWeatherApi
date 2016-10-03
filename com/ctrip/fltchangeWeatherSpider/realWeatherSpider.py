@@ -1,7 +1,7 @@
 #!/usr/bin/ python
 # -*-coding:utf-8-*-
 '''
-Description:城市实时天气爬虫
+Description:锟斤拷锟斤拷实时锟斤拷锟斤拷锟斤拷锟斤拷
 Created on 2016/09/27
 @author: wang.zheng@ctrip.com
 @version: 0.1
@@ -27,6 +27,7 @@ import socket
 socket.setdefaulttimeout(timeout)
 import chardet
 import pandas as pd
+from utils import data2sql
 class BrowserOpener:
     def myopener(self):
         cookie_support = urllib2.HTTPCookieProcessor(cookielib.CookieJar())
@@ -53,9 +54,10 @@ class RealWeatherSpider(BrowserOpener):
     def getRealCityWeather(self,cityCode):
         initUrl = r"http://www.nmc.cn/f/rest/real/%s"%(cityCode)
         contents = self.opener.open(initUrl).read()
-        typeEncode = sys.getfilesystemencoding()  #系统默认编码
-        infoencode = chardet.detect(contents).get('encoding', 'utf-8')  #提取网页的编码
-        realWeatherInfo = eval(contents.decode(infoencode, 'ignore').encode(typeEncode))  #先转换成unicode编码 然后转换系统编码输出
+        pprint(contents)
+        typeEncode = sys.getfilesystemencoding()  #
+        infoencode = chardet.detect(contents).get('encoding', 'utf-8')  #
+        realWeatherInfo = eval(contents.decode(infoencode, 'ignore').encode(typeEncode))
         city = realWeatherInfo["station"]["city"]
         publishDate = realWeatherInfo["publish_time"].split()[0]
         publishTime = realWeatherInfo["publish_time"].split()[1]
@@ -87,10 +89,18 @@ def main():
     cityCodes =json.load(open("cityCode.json","r"),encoding="utf-8")
     rws = RealWeatherSpider()
     for pro in cityCodes:
+        time.sleep(random.random())
         for cc in cityCodes.get(pro):
-            realWeather = pd.concat([realWeather,rws.getRealCityWeather(cc)],ignore_index=True)
+            try:
+                _realWeather = rws.getRealCityWeather(cc)
+            except Exception,e:
+                continue
+            realWeather = pd.concat([realWeather,_realWeather],ignore_index=True)
+            print realWeather
+            #data2sql(realWeather)
+        break
     realWeather.to_csv("realtWeather_%s" % (ctime), index=False)
-    print realWeather
+
 
 if __name__ == '__main__':
     main()

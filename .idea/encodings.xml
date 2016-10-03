@@ -4,5 +4,9 @@
     <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/citySpider.py" charset="GBK" />
     <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/config.py" charset="GBK" />
     <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/forecastWeatherToday.py" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/realWeatherSpider.py" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/realtWeather_20161002" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/realtWeather_20161003" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/com/ctrip/fltchangeWeatherSpider/utils.py" charset="GBK" />
   </component>
 </project>

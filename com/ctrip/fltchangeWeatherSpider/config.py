@@ -1,49 +1,49 @@
 #!/usr/bin/ python
 # -*-coding:utf-8-*-
 '''
-Description:º½±äÌìÆøÅÀ³æÅäÖÃÎÄ¼þ
+Description:èˆªå˜å¤©æ°”çˆ¬è™«é…ç½®æ–‡ä»¶
 Created on 2016/09/27
 @author: wang.zheng@ctrip.com
 @version: 0.1
 '''
 from collections import defaultdict
 import pandas as pd
-#µØÇøÅäÖÃ
+#åœ°åŒºé…ç½®
 provinces = {
-"ABJ":"±±¾©ÊÐ",
-"ATJ":"Ìì½òÊÐ",
-"AHE":"ºÓ±±",
-"ASX":"É½Î÷",
-"ANM":"ÄÚÃÉ¹Å",
-"ALN":"ÁÉÄþ",
-"AJL":"¼ªÁÖ",
-"AHL":"ºÚÁú½­",
-"ASH":"ÉÏº£ÊÐ",
-"AJS":"½­ËÕ",
-"AZJ":"Õã½­",
-"AAH":"°²»Õ",
-"AFJ":"¸£½¨",
-"AJX":"½­Î÷",
-"ASD":"É½¶«",
-"AHA":"ºÓÄÏ",
-"AHB":"ºþ±±",
-"AHN":"ºþÄÏ",
-"AGD":"¹ã¶«",
-"AGX":"¹ãÎ÷",
-"AHI":"º£ÄÏ",
-"ACQ":"ÖØÇìÊÐ",
-"ASC":"ËÄ´¨",
-"AGZ":"¹óÖÝ",
-"AYN":"ÔÆÄÏ",
-"AXZ":"Î÷²Ø",
-"ASN":"ÉÂÎ÷",
-"AGS":"¸ÊËà",
-"AQH":"Çàº£",
-"ANX":"ÄþÏÄ",
-"AXJ":"ÐÂ½®",
-"AXG":"Ïã¸Û",
-"AAM":"°ÄÃÅ",
-"ATW":"Ì¨Íå"
+"ABJ":"åŒ—äº¬å¸‚",
+"ATJ":"å¤©æ´¥å¸‚",
+"AHE":"æ²³åŒ—",
+"ASX":"å±±è¥¿",
+"ANM":"å†…è’™å¤",
+"ALN":"è¾½å®",
+"AJL":"å‰æž—",
+"AHL":"é»‘é¾™æ±Ÿ",
+"ASH":"ä¸Šæµ·å¸‚",
+"AJS":"æ±Ÿè‹",
+"AZJ":"æµ™æ±Ÿ",
+"AAH":"å®‰å¾½",
+"AFJ":"ç¦å»º",
+"AJX":"æ±Ÿè¥¿",
+"ASD":"å±±ä¸œ",
+"AHA":"æ²³å—",
+"AHB":"æ¹–åŒ—",
+"AHN":"æ¹–å—",
+"AGD":"å¹¿ä¸œ",
+"AGX":"å¹¿è¥¿",
+"AHI":"æµ·å—",
+"ACQ":"é‡åº†å¸‚",
+"ASC":"å››å·",
+"AGZ":"è´µå·ž",
+"AYN":"äº‘å—",
+"AXZ":"è¥¿è—",
+"ASN":"é™•è¥¿",
+"AGS":"ç”˜è‚ƒ",
+"AQH":"é’æµ·",
+"ANX":"å®å¤",
+"AXJ":"æ–°ç–†",
+"AXG":"é¦™æ¸¯",
+"AAM":"æ¾³é—¨",
+"ATW":"å°æ¹¾"
 }
 
 provincesCitys= {}
@@ -85,6 +85,3 @@ forecastWeatherTomorrow =pd.DataFrame({},columns=["city",
                                                 "windd",
                                                 "xdsd",
                                                 "yl"])
-
-
-

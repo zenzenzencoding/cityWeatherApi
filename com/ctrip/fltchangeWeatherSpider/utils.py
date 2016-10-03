@@ -1,16 +1,17 @@
 #!/usr/bin/ python
 # -*-coding:utf-8-*-
 '''
-Description:工具函数
+Description:
 Created on 2016/09/27
 @author: wang.zheng@ctrip.com
 @version: 0.1
 '''
-
-#风力等级
+import MySQLdb
+from sqlalchemy import create_engine
+import pandas as pd
 def windLevel(windSpeed):
     wl=2
-    if windSpeed =="微风"or windSpeed <= 3.3:
+    if windSpeed =="寰"or windSpeed <= 3.3:
         wl = 2
     elif windSpeed >= 3.4 and windSpeed <= 5.4:
         wl = 3
@@ -35,3 +36,12 @@ def windLevel(windSpeed):
     elif windSpeed >37.0:
         wl = 13
     return wl-2
+
+def data2sql(df):
+    engine = create_engine('mysql+mysqlconnector://root:ecnu20142014@202.120.87.243:3306/zendata')
+    #con = MySQLdb.connect("202.120.87.243","root","ecnu2014","zendata")
+    df.to_sql("realweather",engine,if_exists="append",index=False)
+
+
+
+

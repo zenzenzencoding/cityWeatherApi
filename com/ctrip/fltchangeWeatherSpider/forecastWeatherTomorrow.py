@@ -1,7 +1,7 @@
 #!/usr/bin/ python
 # -*-coding:utf-8-*-
 '''
-Description:³ÇÊÐÌìÆøÅÀ³æ(t+1Ô¤±¨) Ã¿Ìì06:00·ÖÖ´ÐÐ
+Description:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(t+1Ô¤ï¿½ï¿½) Ã¿ï¿½ï¿½06:00ï¿½ï¿½Ö´ï¿½ï¿½
 Created on 2016/09/27
 @author: wang.zheng@ctrip.com
 @version: 0.1
@@ -38,8 +38,8 @@ class ForecastWeatherSpider():
         req = urllib2.Request(self.initUrl,headers = {"User-Agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1"})
         _forecastWeatherTomorrow = {}
         contents = urllib2.urlopen(req).read()
-        typeEncode = sys.getfilesystemencoding()  #ÏµÍ³Ä¬ÈÏ±àÂë
-        infoencode = chardet.detect(contents).get('encoding', 'utf-8') #ÌáÈ¡ÍøÒ³µÄ±àÂë
+        typeEncode = sys.getfilesystemencoding()  #ÏµÍ³Ä¬ï¿½Ï±ï¿½ï¿½ï¿½
+        infoencode = chardet.detect(contents).get('encoding', 'utf-8') #ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½Ä±ï¿½ï¿½ï¿½
         htmlContents = contents.decode(infoencode, 'ignore').encode(typeEncode)
         sites = etree.HTML(contents)
         ptimeTomorrow =[str(re.search(r"\d+:{1}\d+",item.strip()).group(0)) for item in sites.xpath('//body//div[@id="day1"]/div[@class="row first"]/div/text()')[1:]]
@@ -67,7 +67,7 @@ class ForecastWeatherSpider():
                 njd = str(re.search(r"([-+]*\d+\.*\d*)", item.strip()).group(1))
             except Exception, e:
                 print Exception, ":", e
-                njd = "-999" # -999 ±íÊ¾È±Ê§Öµ
+                njd = "-999" # -999
                 continue
             finally:
                 njdTomorrow.append(njd)
