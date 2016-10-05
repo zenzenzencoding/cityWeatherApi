@@ -20,8 +20,8 @@ from bs4 import BeautifulSoup
 import lxml.html
 from collections import defaultdict
 from pprint import pprint
-from config import provinces, provincesCitys, realWeatherDict, forecastWeatherToday
-
+from config import provinces, provincesCitys, forecastWeatherToday
+from utils import data2sql
 reload(sys)
 sys.setdefaultencoding('utf-8')
 timeout = 20
@@ -85,7 +85,7 @@ class ForecastWeatherSpider():
                 njdToday.append(njd)
         _forecastWeatherToday = {
             "city": [city]*8,
-            "date": [self.time]*8,
+            "createdate": [self.time]*8,
             "forecasttime": ptimeToday,
             "tqxx": tqxxToday,
             "wd": wdToday,
@@ -102,10 +102,9 @@ if __name__ == '__main__':
     fws = ForecastWeatherSpider()
     ctime = time.strftime("%Y%m%d", time.localtime(time.time()))
     #print pd.concat([forecastWeatherToday,fws.getForecastWeather("ASH", "pudong")])
-    cityInfo =json.load(open("cityInfo.json","r"),encoding="utf-8")
+    cityInfo =json.load(open(r"/home/wz/workplace/cityWeatherApi/com/ctrip/fltchangeWeatherSpider/cityInfo.json","r"),encoding="utf-8")
     for pro in cityInfo:
         for cc in cityInfo.get(pro):
             cityname = cityInfo[pro][cc][1]
             forecastWeatherToday = pd.concat([forecastWeatherToday,fws.getForecastWeather(pro,cityname)],ignore_index=True)
-    forecastWeatherToday.to_csv("forecastWeatherToday_%s"%(ctime),index=False)
-
+    data2sql(forecastWeatherToday,"forecastweathertoday")

@@ -37,10 +37,10 @@ def windLevel(windSpeed):
         wl = 13
     return wl-2
 
-def data2sql(df):
-    engine = create_engine('mysql+mysqlconnector://root:ecnu20142014@202.120.87.243:3306/zendata')
+def data2sql(df,tb):
+    engine = create_engine('mysql+mysqlconnector://root:ecnu2014@202.120.87.243:3306/zendata')
     #con = MySQLdb.connect("202.120.87.243","root","ecnu2014","zendata")
-    df.to_sql("realweather",engine,if_exists="append",index=False)
+    df.to_sql(tb,engine,if_exists="append",index=False)
 
 
 

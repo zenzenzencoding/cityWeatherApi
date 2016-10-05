@@ -86,7 +86,7 @@ def main():
     from config import realWeather
     print realWeather
     ctime = time.strftime("%Y%m%d", time.localtime(time.time()))
-    cityCodes =json.load(open("cityCode.json","r"),encoding="utf-8")
+    cityCodes =json.load(open("/home/wz/workplace/cityWeatherApi/com/ctrip/fltchangeWeatherSpider/cityCode.json","r"),encoding="utf-8")
     rws = RealWeatherSpider()
     for pro in cityCodes:
         time.sleep(random.random())
@@ -96,13 +96,6 @@ def main():
             except Exception,e:
                 continue
             realWeather = pd.concat([realWeather,_realWeather],ignore_index=True)
-            print realWeather
-            #data2sql(realWeather)
-        break
-    realWeather.to_csv("realtWeather_%s" % (ctime), index=False)
-
-
+    data2sql(realWeather,"realweather")
 if __name__ == '__main__':
     main()
-
-

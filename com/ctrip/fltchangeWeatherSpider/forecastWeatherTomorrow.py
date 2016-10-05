@@ -20,7 +20,8 @@ from bs4 import BeautifulSoup
 import lxml.html
 from collections import defaultdict
 from pprint import pprint
-from config import provinces,provincesCitys,realWeatherDict,forecastWeatherTomorrow
+from utils import data2sql
+from config import provinces,provincesCitys,forecastWeatherTomorrow
 reload(sys)
 sys.setdefaultencoding('utf-8')
 timeout = 20
@@ -95,7 +96,4 @@ if __name__ == '__main__':
             cityname = cityInfo[pro][cc][1]
             forecastWeatherTomorrow = pd.concat([forecastWeatherTomorrow, fws.getForecastWeather(pro, cityname)],
                                              ignore_index=True)
-    forecastWeatherTomorrow.to_csv("forecastWeatherTomorrow_%s" % (ctime), index=False)
-
-
-
+    data2sql(forecastWeatherTomorrow,"forecastweathertomorrow")

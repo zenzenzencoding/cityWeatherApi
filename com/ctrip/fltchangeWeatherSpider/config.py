@@ -64,7 +64,7 @@ realWeather = pd.DataFrame({},columns=["city",
                                         "windPower"])
 
 forecastWeatherToday = pd.DataFrame({},columns=["city",
-                                                "date",
+                                                "createdate",
                                                 "forecasttime",
                                                 "js",
                                                 "njd",
@@ -75,7 +75,7 @@ forecastWeatherToday = pd.DataFrame({},columns=["city",
                                                 "xdsd",
                                                 "yl"])
 forecastWeatherTomorrow =pd.DataFrame({},columns=["city",
-                                                "date",
+                                                "createdate",
                                                 "forecasttime",
                                                 "js",
                                                 "njd",
